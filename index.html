@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>99 Nama-Nama Allah — Asmaul Husna</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8963E;
+    --gold-light: #E8C070;
+    --gold-pale: #F5E4B8;
+    --deep: #0D1A14;
+    --forest: #1A2E22;
+    --moss: #2C4A36;
+    --sage: #3D6B4F;
+    --cream: #FAF6ED;
+    --warm: #F0E8D5;
+    --text: #2A1F0E;
+    --text-light: #5C4A2A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Crimson Pro', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Decorative background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200,150,62,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(61,107,79,0.2) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* Header */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid rgba(200,150,62,0.2);
+  }
+
+  .hero-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--gold);
+    line-height: 1.4;
+    text-shadow: 0 0 40px rgba(200,150,62,0.3);
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: fadeDown 1s 0.2s ease both;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(250,246,237,0.5);
+    font-style: italic;
+    animation: fadeDown 1s 0.4s ease both;
+  }
+
+  .ornament {
+    display: block;
+    margin: 20px auto;
+    color: var(--gold);
+    opacity: 0.5;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    animation: fadeDown 1s 0.3s ease both;
+  }
+
+  /* Filter / Search bar */
+  .controls {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 32px auto 16px;
+    padding: 0 20px;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,150,62,0.3);
+    border-radius: 40px;
+    color: var(--cream);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .search-wrap input::placeholder { color: rgba(250,246,237,0.35); }
+  .search-wrap input:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.09);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 1.1rem;
+    pointer-events: none;
+  }
+
+  .count-label {
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(250,246,237,0.35);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* Grid */
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    max-width: 1280px;
+    margin: 24px auto 60px;
+    padding: 0 20px;
+  }
+
+  /* Card */
+  .card {
+    background: linear-gradient(135deg, rgba(26,46,34,0.7) 0%, rgba(13,26,20,0.9) 100%);
+    border: 1px solid rgba(200,150,62,0.15);
+    border-radius: 12px;
+    padding: 22px 20px 18px;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,150,62,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(200,150,62,0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,150,62,0.1);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.expanded {
+    border-color: var(--gold);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,150,62,0.2);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .card-num {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(200,150,62,0.4);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .card-names {
+    flex: 1;
+  }
+
+  .card-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    line-height: 1.3;
+    direction: rtl;
+  }
+
+  .card-latin {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(200,150,62,0.6);
+    margin-top: 2px;
+  }
+
+  .card-malay {
+    font-size: 1.05rem;
+    color: var(--cream);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  /* Expand chevron */
+  .chevron {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(200,150,62,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .card.expanded .chevron { transform: rotate(180deg); border-color: var(--gold); }
+
+  /* Expandable content */
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .card.expanded .card-body { max-height: 600px; }
+
+  .card-divider {
+    border: none;
+    border-top: 1px solid rgba(200,150,62,0.15);
+    margin: 14px 0;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .card-meaning {
+    font-size: 0.95rem;
+    color: rgba(250,246,237,0.75);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .card-application {
+    font-size: 0.93rem;
+    color: rgba(250,246,237,0.85);
+    line-height: 1.7;
+    background: rgba(200,150,62,0.06);
+    border-left: 2px solid rgba(200,150,62,0.4);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 30px 20px 50px;
+    border-top: 1px solid rgba(200,150,62,0.1);
+    color: rgba(250,246,237,0.3);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+    .card-arabic { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<header class="hero">
+  <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+  <span class="ornament">✦ ✦ ✦</span>
+  <h1 class="hero-title">Asmaul Husna — 99 Nama-Nama Allah</h1>
+  <p class="hero-sub">Maksud & Panduan Mengaplikasikannya dalam Kehidupan Muslim</p>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Cari nama, maksud, atau aplikasi…" oninput="filterCards()">
+  </div>
+  <p class="count-label" id="countLabel">Menunjukkan 99 daripada 99 nama</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  <p>«Katakanlah: Serulah nama Allah atau nama Ar-Rahman, mana-mana yang kamu seru, Dia mempunyai nama-nama yang terbaik.» — Al-Isra' 17:110</p>
+  <p style="margin-top:8px">Klik pada setiap kad untuk membaca maksud dan cara mengaplikasikannya.</p>
+</footer>
+
+<script>
+const names = [
+  {
+    num: 1, arabic: "اللَّهُ", latin: "Allah", malay: "Allah",
+    meaning: "Nama zat yang paling agung bagi Tuhan Yang Maha Esa, pencipta seluruh alam semesta. Nama ini merangkumi semua sifat kesempurnaan.",
+    apply: "Sebutlah nama 'Allah' dalam setiap keadaan — ketika gembira, sedih, susah, dan lapang. Jadikan 'Bismillah' pembuka setiap tindakan. Ia mengingatkan kita bahawa segala sesuatu bermula dan berakhir dengan-Nya."
+  },
+  {
+    num: 2, arabic: "الرَّحْمَنُ", latin: "Ar-Rahman", malay: "Yang Maha Pemurah",
+    meaning: "Maha Pemurah kepada seluruh makhluk di dunia — Muslim mahupun bukan Muslim, manusia mahupun haiwan. Rahmat-Nya meliputi semua tanpa pengecualian.",
+    apply: "Jadilah pemurah kepada semua orang tanpa mengira latar belakang mereka. Hulurkan bantuan, senyuman, dan kebaikan kepada sesiapa sahaja yang memerlukan — seperti hujan yang turun untuk semua."
+  },
+  {
+    num: 3, arabic: "الرَّحِيمُ", latin: "Ar-Rahim", malay: "Yang Maha Penyayang",
+    meaning: "Maha Penyayang khususnya kepada orang-orang yang beriman di akhirat. Rahmat khusus ini diberikan kepada hamba-hamba-Nya yang taat.",
+    apply: "Pupuk rasa kasih sayang dalam keluarga, sahabat, dan masyarakat. Maafkan kesilapan orang lain. Ingatlah bahawa Allah lebih penyayang dari seorang ibu kepada anaknya — jadikan ini motivasi untuk terus berbuat baik."
+  },
+  {
+    num: 4, arabic: "الْمَلِكُ", latin: "Al-Malik", malay: "Yang Maha Raja",
+    meaning: "Pemilik dan penguasa mutlak seluruh alam semesta. Segala kuasa dan kedaulatan hanya milik-Nya semata-mata.",
+    apply: "Jangan terlalu takut kepada manusia yang berkuasa atau terlalu mengagumi harta dunia. Sedar bahawa setiap pemimpin hanya pemegang amanah sementara. Perkukuhkan keyakinan bahawa hanya Allah yang berkuasa membantu kita."
+  },
+  {
+    num: 5, arabic: "الْقُدُّوسُ", latin: "Al-Quddus", malay: "Yang Maha Suci",
+    meaning: "Maha Suci daripada segala kekurangan, cacat, dan sifat-sifat yang tidak layak. Kesucian-Nya mutlak dan sempurna.",
+    apply: "Jaga kesucian diri — zahir (kebersihan badan, pakaian, tempat) dan batin (hati yang bersih, niat yang ikhlas, fikiran yang baik). Bertaubat setiap kali berdosa untuk kembali kepada kesucian diri."
+  },
+  {
+    num: 6, arabic: "السَّلَامُ", latin: "As-Salam", malay: "Yang Maha Sejahtera",
+    meaning: "Sumber segala keselamatan dan kedamaian. Bebas daripada segala kecacatan. Pemberi keselamatan kepada makhluk-Nya.",
+    apply: "Sebarkan salam kepada sesama Muslim sebagai budaya dan sunnah. Jadilah punca keamanan, bukan pertelingkahan dalam komuniti. Carilah kedamaian batin melalui zikir dan ibadah — kerana jiwa hanya tenteram dengan mengingati Allah."
+  },
+  {
+    num: 7, arabic: "الْمُؤْمِنُ", latin: "Al-Mu'min", malay: "Yang Maha Memberi Keamanan",
+    meaning: "Memberikan keamanan dan ketenangan kepada hamba-hamba-Nya. Membenarkan janji-janji-Nya dan rasul-rasul-Nya.",
+    apply: "Jadilah orang yang boleh dipercayai — seseorang yang memberi rasa selamat kepada orang lain di sekelilingnya. Tunaikan janji, jaga amanah, dan jangan khianati kepercayaan yang diberikan."
+  },
+  {
+    num: 8, arabic: "الْمُهَيْمِنُ", latin: "Al-Muhaimin", malay: "Yang Maha Memelihara",
+    meaning: "Maha Mengawasi, melindungi, dan memelihara seluruh makhluk dengan sepenuhnya. Tiada sesuatu yang terlepas dari pengawasan-Nya.",
+    apply: "Sedar bahawa Allah sentiasa melihat dan memelihara kita. Ini mendorong kita untuk berhati-hati dalam tindak-tanduk, jujur walaupun berseorangan, dan tidak melakukan kejahatan yang tersembunyi."
+  },
+  {
+    num: 9, arabic: "الْعَزِيزُ", latin: "Al-Aziz", malay: "Yang Maha Perkasa",
+    meaning: "Maha Perkasa dan tidak dapat dikalahkan oleh sesiapa pun. Kekuatan dan keperkasaan-Nya tidak ada tandingan.",
+    apply: "Ketika menghadapi kesulitan, ingatlah bahawa kekuatan datang dari Allah. Minta pertolongan-Nya. Jangan lemah semangat kerana kita bersama Yang Maha Perkasa — tiada musibah yang tidak dapat diatasi dengan izin-Nya."
+  },
+  {
+    num: 10, arabic: "الْجَبَّارُ", latin: "Al-Jabbar", malay: "Yang Maha Gagah",
+    meaning: "Yang memaksa dan menundukkan segala sesuatu kepada kehendak-Nya. Yang memperbaiki segala yang patah dan memulihkan yang lemah.",
+    apply: "Ketika hati hancur, berdoa kepada Al-Jabbar untuk memulihkan jiwa. Jangan berlaku zalim kerana Allah Maha Berkuasa menjatuhkan pembalasan. Percayalah bahawa Allah boleh membaiki apa yang rosak dalam hidup kita."
+  },
+  {
+    num: 11, arabic: "الْمُتَكَبِّرُ", latin: "Al-Mutakabbir", malay: "Yang Memiliki Kebesaran",
+    meaning: "Yang memiliki keagungan dan kebesaran mutlak. Kesombongan hanya layak bagi-Nya sahaja, bukan untuk makhluk.",
+    apply: "Singkirkan sifat sombong dan takabbur dari diri. Sedar bahawa manusia hanya makhluk kecil di sisi Allah Yang Maha Besar. Rendah hati (tawadhu') adalah kunci kemuliaan sejati."
+  },
+  {
+    num: 12, arabic: "الْخَالِقُ", latin: "Al-Khaliq", malay: "Yang Maha Pencipta",
+    meaning: "Pencipta seluruh makhluk dari tiada kepada ada. Penciptaan-Nya sempurna, terancang, dan penuh hikmah.",
+    apply: "Renungkan ciptaan Allah — dari sel terkecil hingga galaksi terbesar — untuk mendalami keimanan. Gunakan kreativiti yang Allah kurniakan untuk mencipta kebaikan, seni, ilmu, dan inovasi yang bermanfaat."
+  },
+  {
+    num: 13, arabic: "الْبَارِئُ", latin: "Al-Bari'", malay: "Yang Maha Mengadakan",
+    meaning: "Yang menciptakan makhluk dengan bentuk dan rupa yang sempurna serta berbeza antara satu sama lain.",
+    apply: "Hargai keunikan diri sendiri dan orang lain. Jangan membanding-bandingkan diri kerana Allah menjadikan setiap manusia unik dengan tujuan tertentu. Syukuri kelebihan yang ada."
+  },
+  {
+    num: 14, arabic: "الْمُصَوِّرُ", latin: "Al-Musawwir", malay: "Yang Maha Membentuk Rupa",
+    meaning: "Yang membentuk rupa dan wajah setiap makhluk mengikut kehendak-Nya. Tiada dua wajah yang seratus peratus sama.",
+    apply: "Terima rupa paras dan bentuk fizikal diri dengan redha dan syukur. Jaga kesihatan dan kebersihan sebagai cara menghormati ciptaan Allah. Jangan rendah diri kerana bentuk fizikal — kemuliaan ada pada taqwa."
+  },
+  {
+    num: 15, arabic: "الْغَفَّارُ", latin: "Al-Ghaffar", malay: "Yang Maha Pengampun",
+    meaning: "Yang sentiasa mengampuni dosa hamba-hamba-Nya berulang kali tanpa jemu. Pengampunan-Nya meliputi semua dosa selagi ada taubat.",
+    apply: "Jangan berputus asa daripada rahmat Allah walaupun dosa banyak. Bertaubat dengan ikhlas. Jadilah pemaaf kepada orang lain — jika ingin diampuni Allah, ampunilah orang lain terlebih dahulu."
+  },
+  {
+    num: 16, arabic: "الْقَهَّارُ", latin: "Al-Qahhar", malay: "Yang Maha Berkuasa",
+    meaning: "Yang menundukkan seluruh makhluk di bawah kekuasaan dan kehendak-Nya. Tiada yang mampu melawan atau melarikan diri dari ketetapan-Nya.",
+    apply: "Pasrahkan segala urusan kepada Allah. Ketika menghadapi orang yang zalim, ingatlah bahawa Allah Al-Qahhar akan menghukum kezaliman pada masanya. Ini memberi kekuatan untuk terus bersabar."
+  },
+  {
+    num: 17, arabic: "الْوَهَّابُ", latin: "Al-Wahhab", malay: "Yang Maha Pemberi Kurnia",
+    meaning: "Yang memberikan nikmat dan anugerah tanpa meminta balasan apa pun. Pemberian-Nya tidak terhad dan tidak pernah habis.",
+    apply: "Jadikan pemberian tanpa mengharapkan balasan sebagai amalan harian. Beri dengan ikhlas — sedekah, masa, ilmu, senyuman. Berdoalah kepada Al-Wahhab untuk dipermudahkan hajat dan diberikan rezeki yang baik."
+  },
+  {
+    num: 18, arabic: "الرَّزَّاقُ", latin: "Ar-Razzaq", malay: "Yang Maha Pemberi Rezeki",
+    meaning: "Yang menanggung dan memberikan rezeki kepada seluruh makhluk — manusia, haiwan, tumbuhan — tanpa terkecuali.",
+    apply: "Jangan terlalu risau soal rezeki hingga melakukan perkara haram. Berusaha secara halal, berserah kepada Allah, dan yakin bahawa rezeki sudah ditentukan. Syukuri rezeki yang ada dan kongsikan dengan orang lain."
+  },
+  {
+    num: 19, arabic: "الْفَتَّاحُ", latin: "Al-Fattah", malay: "Yang Maha Pembuka",
+    meaning: "Yang membuka segala yang tertutup, memberi penyelesaian bagi setiap kesulitan, dan membuka pintu rahmat yang tertutup.",
+    apply: "Ketika terasa jalan hidup tertutup dan tiada harapan, berdoalah kepada Al-Fattah. Yakinlah bahawa Allah boleh membuka peluang yang tidak kita sangka. Jangan menyerah — teruslah berusaha dan berdoa."
+  },
+  {
+    num: 20, arabic: "الْعَلِيمُ", latin: "Al-Alim", malay: "Yang Maha Mengetahui",
+    meaning: "Yang mengetahui segala sesuatu — yang zahir dan yang batin, yang lampau, kini, dan akan datang. Ilmu-Nya meliputi segala sesuatu.",
+    apply: "Berbuat baik walaupun tiada orang melihat kerana Allah Maha Mengetahui. Akui keterbatasan ilmu diri dan terus belajar. Sentiasa minta petunjuk kerana hanya Allah mengetahui apa yang terbaik untuk kita."
+  },
+  {
+    num: 21, arabic: "الْقَابِضُ", latin: "Al-Qabidh", malay: "Yang Maha Menyempitkan",
+    meaning: "Yang menyempitkan dan menahan rezeki atau sesuatu menurut hikmah dan kebijaksanaan-Nya.",
+    apply: "Ketika ditimpa kesempitan hidup, terima dengan sabar dan yakin ada hikmah di sebaliknya. Kesempitan kadang-kala adalah ujian yang meningkatkan darjat. Jangan panik — ini bersifat sementara."
+  },
+  {
+    num: 22, arabic: "الْبَاسِطُ", latin: "Al-Basit", malay: "Yang Maha Meluaskan",
+    meaning: "Yang meluaskan dan melapangkan rezeki, rahmat, dan kesenangan kepada siapa yang dikehendaki-Nya.",
+    apply: "Bersyukur dan jangan lupa diri ketika dalam keluasan. Gunakan masa lapang dan rezeki lebih untuk kebaikan. Ingatlah Allah ketika senang sama seperti kita ingat-Nya ketika susah."
+  },
+  {
+    num: 23, arabic: "الْخَافِضُ", latin: "Al-Khafidh", malay: "Yang Maha Merendahkan",
+    meaning: "Yang merendahkan sesiapa yang sombong dan menjatuhkan yang zalim dengan kuasa-Nya.",
+    apply: "Takutilah sifat sombong dan angkuh kerana Allah boleh merendahkan sesiapa sahaja. Jadikan ini peringatan untuk sentiasa tawadhu' dan menghormati semua orang tanpa mengira status."
+  },
+  {
+    num: 24, arabic: "الرَّافِعُ", latin: "Ar-Rafi'", malay: "Yang Maha Meninggikan",
+    meaning: "Yang meninggikan darjat dan kedudukan hamba-hamba-Nya yang dikehendaki-Nya, khususnya orang-orang beriman.",
+    apply: "Tingkatkan diri melalui ilmu, amal, dan akhlak mulia — bukan melalui cara yang tidak halal. Yakin bahawa Allah boleh mengangkat darjat kita walaupun dari keadaan yang rendah, asalkan kita berusaha dan bertaqwa."
+  },
+  {
+    num: 25, arabic: "الْمُعِزُّ", latin: "Al-Mu'iz", malay: "Yang Maha Memuliakan",
+    meaning: "Yang memberikan kemuliaan dan kehormatan kepada sesiapa yang dikehendaki-Nya.",
+    apply: "Cari kemuliaan melalui jalan Allah — dengan ilmu, ibadah, dan pengabdian — bukan dengan cara yang merendahkan orang lain. Muliakan orang lain dan Allah akan memuliakan kita."
+  },
+  {
+    num: 26, arabic: "الْمُذِلُّ", latin: "Al-Muzil", malay: "Yang Maha Menghinakan",
+    meaning: "Yang merendahkan dan menghinakan sesiapa yang zalim, kafir, dan sombong menurut hikmah-Nya.",
+    apply: "Jauhi kezaliman dan penipuan. Ingatlah bahawa kemewahan dan kuasa dunia yang diperoleh dengan cara salah akan berakhir dengan kehinaan. Pilih jalan yang benar walaupun sukar."
+  },
+  {
+    num: 27, arabic: "السَّمِيعُ", latin: "As-Sami'", malay: "Yang Maha Mendengar",
+    meaning: "Yang mendengar segala sesuatu — bisikan hati, doa yang perlahan, tangisan di tengah malam — tanpa ada yang tersembunyi.",
+    apply: "Berdoalah dengan yakin bahawa Allah mendengar setiap doa. Jaga percakapan — jangan berkata perkara yang menyakitkan atau haram. Banyakkan doa kerana Allah tidak pernah 'tuli' terhadap permohonan hamba-Nya."
+  },
+  {
+    num: 28, arabic: "الْبَصِيرُ", latin: "Al-Basir", malay: "Yang Maha Melihat",
+    meaning: "Yang melihat segala sesuatu tanpa halangan — yang zahir dan tersembunyi, yang besar dan yang terkecil.",
+    apply: "Jadikan kesedaran bahawa Allah melihat segala-galanya sebagai pengawal perilaku. Berbuat baik walaupun berseorangan. Jangan lakukan kejahatan di tempat gelap kerana Allah tetap Melihat."
+  },
+  {
+    num: 29, arabic: "الْحَكَمُ", latin: "Al-Hakam", malay: "Yang Maha Menghakimi",
+    meaning: "Hakim yang paling adil dan bijaksana. Keputusan-Nya muktamad dan penuh keadilan.",
+    apply: "Serahkan persoalan keadilan kepada Allah ketika dianiaya. Jadilah adil dalam menghakimi orang lain — jangan menghukum tanpa bukti. Percayalah bahawa setiap kezaliman akan diadili di Mahkamah Allah."
+  },
+  {
+    num: 30, arabic: "الْعَدْلُ", latin: "Al-Adl", malay: "Yang Maha Adil",
+    meaning: "Yang Maha Adil dalam segala keputusan dan tindakan. Keadilan-Nya sempurna, tidak memihak, dan tidak berat sebelah.",
+    apply: "Tegakkan keadilan dalam setiap peranan — sebagai ibu bapa, pemimpin, pekerja, atau jiran. Jangan zalim kepada sesiapa. Yakin bahawa walau dunia tidak adil, Allah pasti akan memberi keadilan mutlak."
+  },
+  {
+    num: 31, arabic: "اللَّطِيفُ", latin: "Al-Latif", malay: "Yang Maha Lembut",
+    meaning: "Yang Maha Halus, lembut dalam penjagaan-Nya. Mengetahui hal-hal yang paling tersembunyi dan melindungi hamba-Nya dengan cara yang tidak disangka.",
+    apply: "Percayalah bahawa Allah melindungi kita melalui cara-cara yang kita tidak sedar. Ketika berhadapan dengan orang lain, bersikap lembut dan belas kasihan. Berdoa dengan nama Al-Latif dalam urusan yang memerlukan kehalusan."
+  },
+  {
+    num: 32, arabic: "الْخَبِيرُ", latin: "Al-Khabir", malay: "Yang Maha Mengetahui Selok-Belok",
+    meaning: "Yang mengetahui seluruh perkara secara mendalam dan terperinci — setiap niat, setiap gerak-geri, setiap rahsia.",
+    apply: "Jujurlah dalam setiap urusan kerana Allah Maha Mengetahui niat tersembunyi. Jangan menipu diri sendiri. Amalkan muhasabah (introspeksi) harian untuk memperbaiki diri."
+  },
+  {
+    num: 33, arabic: "الْحَلِيمُ", latin: "Al-Halim", malay: "Yang Maha Penyabar",
+    meaning: "Yang Maha Penyabar dan tidak tergesa-gesa menghukum hambanya yang berdosa, memberi peluang untuk bertaubat.",
+    apply: "Tiru sifat sabar Allah dalam kehidupan seharian. Jangan tergesa-gesa marah atau membalas dendam. Beri kesempatan kepada orang yang bersalah untuk memperbetulkan diri — kerana Allah pun memberi kita peluang."
+  },
+  {
+    num: 34, arabic: "الْعَظِيمُ", latin: "Al-Azim", malay: "Yang Maha Agung",
+    meaning: "Yang memiliki keagungan dan kebesaran yang mutlak, mengatasi segala sesuatu dalam semua aspek.",
+    apply: "Renungkan keagungan Allah dalam setiap solat — terutama ketika sujud. Keagungan Allah menyedarkan betapa kecilnya masalah kita. Ini memberi kekuatan dan perspektif yang betul dalam menghadapi cabaran."
+  },
+  {
+    num: 35, arabic: "الْغَفُورُ", latin: "Al-Ghafur", malay: "Yang Maha Pengampun",
+    meaning: "Yang mengampuni dosa-dosa hamba-hamba-Nya secara menyeluruh dan sempurna, menutupnya tanpa meninggalkan kesan.",
+    apply: "Jangan berputus asa dari keampunan Allah. Bertaubat setiap hari. Ampunkan orang lain dengan sepenuh hati — bukan sekadar di mulut — seperti Allah mengampuni kita sepenuhnya."
+  },
+  {
+    num: 36, arabic: "الشَّكُورُ", latin: "Ash-Shakur", malay: "Yang Maha Menghargai",
+    meaning: "Yang menghargai dan memberi ganjaran berlipat ganda atas setiap amalan kebajikan hamba-Nya, walaupun sekecil zarah.",
+    apply: "Jadilah peribadi yang bersyukur — ucapkan terima kasih kepada orang yang berbuat baik. Ingat bahawa Allah menghargai setiap amalan kecil kita. Ini memotivasikan kita untuk terus berbuat baik walaupun nampak kecil."
+  },
+  {
+    num: 37, arabic: "الْعَلِيُّ", latin: "Al-Ali", malay: "Yang Maha Tinggi",
+    meaning: "Yang Maha Tinggi darjat dan kedudukan-Nya, mengatasi segala makhluk secara mutlak.",
+    apply: "Agungkan Allah dalam setiap aspek kehidupan. Ketika solat, sedar bahawa kita sedang berhadapan dengan Yang Maha Tinggi — lakukan dengan penuh rasa hormat dan khusyuk."
+  },
+  {
+    num: 38, arabic: "الْكَبِيرُ", latin: "Al-Kabir", malay: "Yang Maha Besar",
+    meaning: "Yang Maha Besar dalam segala hal — ilmu, kuasa, keagungan, dan segala sifat kesempurnaan.",
+    apply: "Apabila masalah terasa sangat besar, ingatlah Allah lebih besar dari semua masalah itu. Ucaplah 'Allahu Akbar' (Allah Maha Besar) bukan sekadar di bibir, tetapi hayati maknanya."
+  },
+  {
+    num: 39, arabic: "الْحَفِيظُ", latin: "Al-Hafiz", malay: "Yang Maha Memelihara",
+    meaning: "Yang memelihara dan menjaga seluruh makhluk serta mencatat semua amalan dengan sempurna.",
+    apply: "Berasa tenang kerana Allah memelihara kita. Baca doa perlindungan (ta'awwuz) setiap hari. Jaga amanah yang diberikan kepada kita — anak-anak, harta, jawatan — kerana Allah mencatat setiap tanggungjawab."
+  },
+  {
+    num: 40, arabic: "الْمُقِيتُ", latin: "Al-Muqit", malay: "Yang Maha Pemberi Makanan",
+    meaning: "Yang memberikan makanan, tenaga, dan sustenance kepada semua makhluk mengikut keperluan masing-masing.",
+    apply: "Jangan bimbang soal rezeki makanan dan keperluan asas. Berusaha dengan halal dan serahkan hasilnya kepada Allah. Kongsikan makanan dengan yang memerlukan sebagai tanda syukur."
+  },
+  {
+    num: 41, arabic: "الْحَسِيبُ", latin: "Al-Hasib", malay: "Yang Maha Menghisab",
+    meaning: "Yang akan menghitung dan menghisab setiap amal perbuatan manusia dengan tepat dan sempurna di Hari Kiamat.",
+    apply: "Hisab diri sebelum dihisab Allah — muhasabah harian. Tanya diri: 'Apa yang aku lakukan hari ini?' Kurangkan perkara sia-sia dan tingkatkan amal kebaikan sebagai persediaan hari perhitungan."
+  },
+  {
+    num: 42, arabic: "الْجَلِيلُ", latin: "Al-Jalil", malay: "Yang Maha Luhur",
+    meaning: "Yang memiliki keluhuran, kebesaran, dan keagungan yang tertinggi dalam semua sifat kesempurnaan.",
+    apply: "Letakkan keagungan Allah di atas segala-galanya. Jangan letakkan cinta kepada manusia, harta, atau jawatan melebihi cinta kepada Allah. Penuhi hati dengan keagungan-Nya."
+  },
+  {
+    num: 43, arabic: "الْكَرِيمُ", latin: "Al-Karim", malay: "Yang Maha Mulia",
+    meaning: "Yang Maha Dermawan, mulia, dan pemurah tanpa batas. Kemurahan-Nya tidak mengharapkan balasan.",
+    apply: "Jadilah mulia dalam perilaku — bermurah hati, jangan kedekut, jangan pentingkan diri. Berdoa kepada Al-Karim untuk mendapat rezeki yang mulia dan kehidupan yang bermakna."
+  },
+  {
+    num: 44, arabic: "الرَّقِيبُ", latin: "Ar-Raqib", malay: "Yang Maha Mengawasi",
+    meaning: "Yang sentiasa mengawasi dan memerhati semua makhluk pada setiap saat tanpa jemu.",
+    apply: "Hayati konsep 'muraqabah' — rasa sentiasa diperhati Allah. Ini menjadi perisai terkuat dari melakukan kemungkaran. Hidup dengan penuh integriti kerana tiada yang tersembunyi dari-Nya."
+  },
+  {
+    num: 45, arabic: "الْمُجِيبُ", latin: "Al-Mujib", malay: "Yang Maha Memperkenankan",
+    meaning: "Yang memperkenankan dan menjawab setiap doa hamba-hamba-Nya pada waktu yang paling tepat.",
+    apply: "Jangan pernah berputus asa dalam berdoa. Yakin bahawa Allah pasti menjawab doa — mungkin segera, mungkin ditangguhkan, atau digantikan dengan yang lebih baik. Teruslah berdoa dengan penuh harapan."
+  },
+  {
+    num: 46, arabic: "الْوَاسِعُ", latin: "Al-Wasi'", malay: "Yang Maha Luas",
+    meaning: "Yang Maha Luas ilmu, rahmat, kuasa, dan keampunan-Nya — merangkumi seluruh alam tanpa had.",
+    apply: "Jangan sempitkan fikiran tentang rahmat Allah — ia jauh lebih luas dari kita bayangkan. Luaskan perspektif hidup, jangan terlalu rigid. Berdoa memohon keluasan rezeki, ilmu, dan hati."
+  },
+  {
+    num: 47, arabic: "الْحَكِيمُ", latin: "Al-Hakim", malay: "Yang Maha Bijaksana",
+    meaning: "Yang Maha Bijaksana dalam setiap keputusan, penetapan, dan ciptaan-Nya. Tiada sesuatu yang sia-sia atau tanpa tujuan.",
+    apply: "Percayalah ada hikmah di sebalik setiap ujian dan takdir. Ketika tidak faham mengapa sesuatu berlaku, ingatlah Allah Al-Hakim — Dia lebih tahu. Ini menghindarkan kita dari rasa putus asa dan komplain berlebihan."
+  },
+  {
+    num: 48, arabic: "الْوَدُودُ", latin: "Al-Wadud", malay: "Yang Maha Mencintai",
+    meaning: "Yang mencintai hamba-hamba-Nya yang beriman dengan cinta yang murni, dan mengurniakan kasih sayang.",
+    apply: "Sedar bahawa Allah mencintai kita — ini adalah motivasi terbesar. Balas cinta-Nya dengan taat dan ibadat. Suburkan cinta dan kasih sayang sesama manusia dalam keluarga dan komuniti."
+  },
+  {
+    num: 49, arabic: "الْمَجِيدُ", latin: "Al-Majid", malay: "Yang Maha Mulia",
+    meaning: "Yang memiliki kemuliaan yang sempurna dalam zat dan sifat-Nya. Kemuliaan-Nya kekal dan tidak pernah berkurang.",
+    apply: "Muliakan nama Allah — jaga adab ketika menyebutnya. Berusaha menjadi peribadi yang mulia melalui akhlak terpuji. Ingat bahawa kemuliaan manusia diukur bukan dari harta, tetapi dari ketaqwaan."
+  },
+  {
+    num: 50, arabic: "الْبَاعِثُ", latin: "Al-Ba'ith", malay: "Yang Maha Membangkitkan",
+    meaning: "Yang akan membangkitkan seluruh makhluk dari kematian pada Hari Kiamat untuk dihisab.",
+    apply: "Sedar bahawa kehidupan ini tidak berakhir dengan kematian. Hidup dengan orientasi akhirat — setiap tindakan ada kesan abadi. Ini mendorong kita untuk beramal dengan serius dan tidak hanya mengejar dunia."
+  },
+  {
+    num: 51, arabic: "الشَّهِيدُ", latin: "Ash-Shahid", malay: "Yang Maha Menyaksikan",
+    meaning: "Yang menyaksikan dan hadir dalam segala kejadian, tiada sesuatu pun yang terlepas dari perhatian-Nya.",
+    apply: "Hidup sebagai saksi kebenaran — berani berkata benar walaupun pahit. Ingat Allah menyaksikan setiap perbuatan kita. Jadilah orang yang konsisten antara perilaku di hadapan orang dan ketika berseorangan."
+  },
+  {
+    num: 52, arabic: "الْحَقُّ", latin: "Al-Haq", malay: "Yang Maha Benar",
+    meaning: "Yang wujud secara hakiki dan mutlak. Segala yang dari-Nya adalah kebenaran.",
+    apply: "Cintai kebenaran dan benci kepalsuan. Jangan berbohong walau dalam gurauan sekalipun. Cari kebenaran dalam setiap perkara — dalam akidah, dalam berita, dalam maklumat sebelum disebarkan."
+  },
+  {
+    num: 53, arabic: "الْوَكِيلُ", latin: "Al-Wakil", malay: "Yang Maha Memelihara",
+    meaning: "Yang menjadi penjamin dan pelindung terbaik bagi hamba-hamba yang bertawakkal kepada-Nya.",
+    apply: "Amalkan tawakkal — buat usaha terbaik, kemudian serahkan hasilnya kepada Allah. 'Hasbunallah wa ni'mal wakil' — 'Cukuplah Allah sebagai pelindung kami.' Ini menghapuskan kebimbangan yang berlebihan."
+  },
+  {
+    num: 54, arabic: "الْقَوِيُّ", latin: "Al-Qawi", malay: "Yang Maha Kuat",
+    meaning: "Yang memiliki kekuatan yang sempurna dan tidak pernah lemah atau berkurang.",
+    apply: "Minta kekuatan dari Allah ketika lemah. Bergantunglah kepada-Nya bukan kepada manusia. Kuatkan iman dan jiwa melalui ibadah, sehingga mampu menghadapi cabaran dengan teguh."
+  },
+  {
+    num: 55, arabic: "الْمَتِينُ", latin: "Al-Matin", malay: "Yang Maha Teguh",
+    meaning: "Yang memiliki keteguhan dan kemantapan yang tidak tergoyahkan dalam segala sifat-Nya.",
+    apply: "Jadilah teguh dalam pendirian atas kebenaran — jangan mudah goyah oleh tekanan rakan sebaya atau cabaran hidup. Pegang prinsip Islam dengan kukuh dalam era yang penuh godaan."
+  },
+  {
+    num: 56, arabic: "الْوَلِيُّ", latin: "Al-Wali", malay: "Yang Maha Melindungi",
+    meaning: "Pelindung dan penolong sejati bagi orang-orang yang beriman. Yang mengambil mereka sebagai kekasih-Nya.",
+    apply: "Dekatkan diri kepada Allah supaya Dia menjadi 'wali' kita — pelindung terbaik. Jaga hubungan dengan-Nya melalui solat dan zikir. Pilih Allah sebagai tempat sandaran utama, bukan manusia."
+  },
+  {
+    num: 57, arabic: "الْحَمِيدُ", latin: "Al-Hamid", malay: "Yang Maha Terpuji",
+    meaning: "Yang layak menerima segala pujian dan syukur. Semua kebaikan dan keindahan kembali kepada-Nya.",
+    apply: "Perbanyakkan ucapan 'Alhamdulillah' — syukur kepada Allah dalam setiap keadaan. Puji Allah bukan hanya ketika senang, tetapi juga ketika susah. Ini membentuk mentaliti positif yang kuat."
+  },
+  {
+    num: 58, arabic: "الْمُحْصِي", latin: "Al-Muhsi", malay: "Yang Maha Menghitung",
+    meaning: "Yang menghitung dan mencatat setiap sesuatu tanpa tertinggal satu pun — dari bintang di langit hingga zarah di bumi.",
+    apply: "Jaga kualiti dan kuantiti amal. Jangan anggap remeh dosa kecil kerana semuanya dikira. Sebaliknya, jangan pula memandang enteng kebaikan kecil — ia pun dikira. Istiqamah dalam kebaikan."
+  },
+  {
+    num: 59, arabic: "الْمُبْدِئُ", latin: "Al-Mubdi'", malay: "Yang Maha Memulakan",
+    meaning: "Yang memulakan penciptaan dari tiada tanpa contoh sebelumnya.",
+    apply: "Beranilah memulakan perkara baru yang baik. Jangan tunggu keadaan sempurna — mulakan dengan bismillah. Yakin bahawa Allah yang mencipta segalanya dari tiada pasti boleh membantu kita memulakan sesuatu yang bermakna."
+  },
+  {
+    num: 60, arabic: "الْمُعِيدُ", latin: "Al-Mu'id", malay: "Yang Maha Mengembalikan",
+    meaning: "Yang mengembalikan makhluk kepada-Nya setelah kematian dan membangkitkan semula pada Hari Kiamat.",
+    apply: "Sedar bahawa segala sesuatu akan kembali kepada Allah. Ini mengajar kita untuk tidak terlalu terikat kepada dunia. Persiapkan 'pulang' dengan penuh amal dan taubat."
+  },
+  {
+    num: 61, arabic: "الْمُحْيِي", latin: "Al-Muhyi", malay: "Yang Maha Menghidupkan",
+    meaning: "Yang memberikan kehidupan kepada makhluk-Nya — dari janin hingga hati yang mati dibangkitkan semula.",
+    apply: "Hidupkan hati dengan zikir dan ilmu — hati yang lalai dari Allah seperti hati yang mati. Hidupkan sunnah yang sudah dilupakan. Berdoa agar Allah menghidupkan semangat ibadah kita yang mungkin semakin luntur."
+  },
+  {
+    num: 62, arabic: "الْمُمِيتُ", latin: "Al-Mumit", malay: "Yang Maha Mematikan",
+    meaning: "Yang mewafatkan makhluk pada waktu yang telah ditentukan. Kematian adalah kepastian di tangan-Nya.",
+    apply: "Ingat mati setiap hari — ini bukan morbid, tetapi motivasi untuk beramal. 'Akthiru min zikril hadzimil lazzat' — perbanyakkan ingatan kepada pemutus kelazatan (mati). Hidup lebih bermakna apabila kita sedar ia sementara."
+  },
+  {
+    num: 63, arabic: "الْحَيُّ", latin: "Al-Hayy", malay: "Yang Maha Hidup",
+    meaning: "Yang hidup kekal abadi tanpa permulaan dan tanpa pengakhiran. Kehidupan-Nya sempurna dan tidak bergantung pada sesuatu.",
+    apply: "Bergantunglah kepada yang Maha Hidup, bukan kepada manusia yang juga akan mati. Dalam setiap doa, sedarilah kita memohon kepada Tuhan yang Hidup dan Mendengar — ini memberi keyakinan dalam berdoa."
+  },
+  {
+    num: 64, arabic: "الْقَيُّومُ", latin: "Al-Qayyum", malay: "Yang Maha Berdiri Sendiri",
+    meaning: "Yang berdiri sendiri, tidak memerlukan sesuatu pun, dan segala makhluk bergantung kepada-Nya.",
+    apply: "Sedar bahawa kita sepenuhnya bergantung kepada Allah. Ini mengajar tawadhu' dan rasa syukur. Baca ayat Kursi — mengandungi Al-Hayy dan Al-Qayyum — sebagai perlindungan harian."
+  },
+  {
+    num: 65, arabic: "الْوَاجِدُ", latin: "Al-Wajid", malay: "Yang Maha Menemukan",
+    meaning: "Yang tidak pernah kehilangan apa pun dan sentiasa menemukan apa yang dikehendaki-Nya.",
+    apply: "Yakin bahawa Allah boleh mengembalikan apa yang hilang — peluang, kesihatan, semangat, hubungan. Berdoa dengan penuh harapan. Jangan anggap sesuatu itu hilang selamanya selagi Allah berkuasa."
+  },
+  {
+    num: 66, arabic: "الْمَاجِدُ", latin: "Al-Majid", malay: "Yang Maha Mulia dan Pemurah",
+    meaning: "Yang menggabungkan kemuliaan dengan kedermawanan — mulia dalam zat, pemurah dalam pemberian.",
+    apply: "Jadikan kemuliaan dan kemurahan sebagai pasangan dalam peribadi kita. Mulia dalam akhlak, pemurah dalam memberi. Ini adalah gambaran Muslim yang ideal dalam masyarakat."
+  },
+  {
+    num: 67, arabic: "الْوَاحِدُ", latin: "Al-Wahid", malay: "Yang Maha Esa",
+    meaning: "Yang Maha Esa dalam zat-Nya. Tiada sekutu, tiada yang serupa, tiada bahagian, tiada tandingan.",
+    apply: "Perkukuhkan tauhid — keyakinan kepada keesaan Allah. Jauhi syirik dalam semua bentuknya — dari menyembah berhala hingga bergantung kepada bomoh atau tukang sihir. Ini adalah teras keimanan."
+  },
+  {
+    num: 68, arabic: "الْأَحَدُ", latin: "Al-Ahad", malay: "Yang Tunggal",
+    meaning: "Yang Tunggal tanpa ada yang menyamainya dalam segala aspek ketuhanan.",
+    apply: "Hayati kalimah 'La ilaha illallah' — Tiada tuhan selain Allah. Jadikan tauhid sebagai kompas hidup. Surah Al-Ikhlas (Qul huwallahu ahad) adalah ungkapan keesaan yang dianjurkan dibaca setiap hari."
+  },
+  {
+    num: 69, arabic: "الصَّمَدُ", latin: "As-Samad", malay: "Yang Menjadi Tumpuan",
+    meaning: "Yang menjadi tumpuan dan tempat bergantung seluruh makhluk dalam setiap hajat dan keperluan.",
+    apply: "Jadikan Allah sebagai tempat pertama mengadu — sebelum manusia. Bawa semua masalah dalam doa kepada-Nya. Baca Surah Al-Ikhlas untuk menghayati sifat ini dan kuatkan hubungan dengan Allah."
+  },
+  {
+    num: 70, arabic: "الْقَادِرُ", latin: "Al-Qadir", malay: "Yang Maha Berkuasa",
+    meaning: "Yang berkuasa melakukan apa sahaja yang dikehendaki-Nya tanpa sebarang halangan.",
+    apply: "Tiada mustahil bagi Allah. Berdoa untuk perkara yang kelihatan mustahil sekalipun — Allah Maha Berkuasa. Ini memberi harapan kepada yang berputus asa dan kekuatan kepada yang lemah."
+  },
+  {
+    num: 71, arabic: "الْمُقْتَدِرُ", latin: "Al-Muqtadir", malay: "Yang Memiliki Kekuasaan Penuh",
+    meaning: "Yang memiliki kekuasaan sempurna dan mutlak dalam segala hal, mengatasi semua yang ada.",
+    apply: "Yakin bahawa Allah dapat membalikkan keadaan dalam sekelip mata. Jangan tunduk kepada rasa tidak berdaya. Hadapi setiap halangan dengan keyakinan bahawa Yang Maha Berkuasa adalah sandaran kita."
+  },
+  {
+    num: 72, arabic: "الْمُقَدِّمُ", latin: "Al-Muqaddim", malay: "Yang Maha Mendahulukan",
+    meaning: "Yang mendahulukan apa yang dikehendaki-Nya — mendahulukan siapa yang berhak.",
+    apply: "Dahulukan Allah dan kewajipan agama dalam jadual harian. Dahulukan kepentingan orang lain sebelum diri sendiri dalam konteks yang sesuai. Belajar tentang keutamaan dalam Islam dan amalkannya."
+  },
+  {
+    num: 73, arabic: "الْمُؤَخِّرُ", latin: "Al-Muakhkhir", malay: "Yang Maha Mengakhirkan",
+    meaning: "Yang mengakhirkan apa yang dikehendaki-Nya mengikut hikmah dan kebijaksanaan-Nya.",
+    apply: "Terima apabila sesuatu yang kita inginkan tertangguh — mungkin ada hikmah di sebaliknya. Jangan tergesa-gesa dalam membuat keputusan besar. Percayalah bahawa masa Allah adalah yang terbaik."
+  },
+  {
+    num: 74, arabic: "الْأَوَّلُ", latin: "Al-Awwal", malay: "Yang Maha Pertama",
+    meaning: "Yang wujud sebelum segala sesuatu ada. Tiada permulaan bagi-Nya.",
+    apply: "Sedar bahawa Allah ada sebelum kita dan segala masalah kita. Kembalilah kepada-Nya apabila hilang arah. Dalam setiap perkara baru, mulakan dengan 'Bismillah' — memulakan dengan nama Yang Pertama."
+  },
+  {
+    num: 75, arabic: "الْآخِرُ", latin: "Al-Akhir", malay: "Yang Maha Akhir",
+    meaning: "Yang kekal setelah segala sesuatu binasa. Tiada kesudahan bagi-Nya.",
+    apply: "Sedar bahawa hanya Allah yang kekal — dunia dan semua isinya akan lenyap. Oleh itu, jangan terlalu lekat pada dunia. Labur untuk akhirat yang kekal bersama Al-Akhir."
+  },
+  {
+    num: 76, arabic: "الظَّاهِرُ", latin: "Az-Zahir", malay: "Yang Maha Nyata",
+    meaning: "Yang nyata kewujudan-Nya melalui tanda-tanda dan bukti di alam semesta.",
+    apply: "Tadabbur alam — renungkan ciptaan Allah di sekeliling untuk menguatkan iman. Lihat tanda kebesaran Allah dalam alam, sains, dan kehidupan seharian. Ini adalah ibadah yang mendalam."
+  },
+  {
+    num: 77, arabic: "الْبَاطِنُ", latin: "Al-Batin", malay: "Yang Maha Tersembunyi",
+    meaning: "Yang tersembunyi dari pandangan makhluk namun lebih dekat dari urat leher kita sendiri.",
+    apply: "Sedar bahawa Allah lebih dekat dari yang kita sangka. Dalam kesunyian, kita tidak pernah benar-benar berseorangan. Ini memberi ketenangan jiwa kepada yang kesepian dan kekuatan kepada yang tertekan."
+  },
+  {
+    num: 78, arabic: "الْوَالِي", latin: "Al-Wali", malay: "Yang Maha Memerintah",
+    meaning: "Yang menguasai dan mentadbir seluruh alam dengan penuh kebijaksanaan.",
+    apply: "Serahkan setiap urusan kepada Allah yang Maha Mentadbir. Jangan bimbang berlebihan tentang masa depan kerana Allah sudah mengatur segalanya. Fokus pada usaha, serahkan keputusan kepada-Nya."
+  },
+  {
+    num: 79, arabic: "الْمُتَعَالِي", latin: "Al-Muta'ali", malay: "Yang Maha Tinggi Darjat-Nya",
+    meaning: "Yang Maha Tinggi darjat-Nya mengatasi segala yang dapat digambarkan oleh akal dan fikiran makhluk.",
+    apply: "Kenali batas akal manusia dalam memahami Allah. Jangan cuba melogikkan segala hal tentang Allah dengan akal sempit kita. Serah kepada keimanan apa yang di luar kemampuan akal — ini adalah tanda kematangan iman."
+  },
+  {
+    num: 80, arabic: "الْبَرُّ", latin: "Al-Barr", malay: "Yang Maha Dermawan",
+    meaning: "Yang Maha Dermawan dan berbuat baik kepada hamba-hamba-Nya melebihi apa yang mereka minta.",
+    apply: "Jadilah 'barr' (berbakti) kepada ibu bapa dan keluarga. Berbuat baik kepada orang lain tanpa diminta. Ingat Allah telah memberi banyak nikmat sebelum kita sempat memintanya."
+  },
+  {
+    num: 81, arabic: "التَّوَّابُ", latin: "At-Tawwab", malay: "Yang Maha Menerima Taubat",
+    meaning: "Yang sentiasa menerima taubat hamba-hamba-Nya dengan gembira, berulang-ulang kali.",
+    apply: "Bertaubat setiap hari — walaupun dosa yang sama berulang. Allah tidak jemu menerima taubat selagi hamba tidak jemu bertaubat. Ini adalah rahmat terbesar bagi orang yang berdosa."
+  },
+  {
+    num: 82, arabic: "الْمُنْتَقِمُ", latin: "Al-Muntaqim", malay: "Yang Maha Pembalas",
+    meaning: "Yang membalas dendam atas kezaliman dan dosa dengan pembalasan yang setimpal dan adil.",
+    apply: "Jauhi kezaliman kerana pembalasan Allah pasti datang. Ketika dizalimi, serahkan pembalasan kepada Allah — ini lebih bijak dari membalas sendiri yang mungkin melanggar batas. Bersabarlah."
+  },
+  {
+    num: 83, arabic: "الْعَفُوُّ", latin: "Al-Afuw", malay: "Yang Maha Pemaaf",
+    meaning: "Yang memaafkan dosa-dosa hamba-Nya dan menghapuskannya seolah-olah ia tidak pernah berlaku.",
+    apply: "Berdoalah pada malam Lailatul Qadar: 'Allahumma innaka afuwwun tuhibbul afwa fa'fu anni.' Amalkan sifat pemaaf dalam hubungan sesama manusia — maafkan tanpa syarat, seperti Allah memaafkan kita."
+  },
+  {
+    num: 84, arabic: "الرَّؤُوفُ", latin: "Ar-Ra'uf", malay: "Yang Maha Pengasih",
+    meaning: "Yang memiliki belas kasihan yang sangat mendalam kepada hamba-hamba-Nya.",
+    apply: "Tunjukkan belas kasihan kepada yang lemah — fakir miskin, yatim piatu, orang sakit, haiwan. Jadikan belas kasihan sebagai teras kepimpinan dan keluarga. 'Kasihilah yang di bumi, nescaya yang di langit akan mengasihi kamu.'"
+  },
+  {
+    num: 85, arabic: "مَالِكُ الْمُلْكِ", latin: "Maliku'l-Mulk", malay: "Pemilik Segala Kerajaan",
+    meaning: "Yang memiliki seluruh kerajaan alam semesta dan berkuasa memberi atau mencabut kekuasaan kepada sesiapa yang dikehendaki-Nya.",
+    apply: "Ingat bahawa kekuasaan manusia hanyalah pinjaman sementara. Gunakan kuasa dan pengaruh yang ada untuk kebaikan. Jangan zalim dengan kuasa kerana pemilik sebenar akan minta pertanggungjawaban."
+  },
+  {
+    num: 86, arabic: "ذُو الْجَلَالِ وَالْإِكْرَامِ", latin: "Dzul Jalali wal Ikram", malay: "Yang Memiliki Keagungan dan Kemuliaan",
+    meaning: "Yang memiliki keagungan yang mutlak dan memberikan kemuliaan yang sempurna.",
+    apply: "Perbanyakkan doa dengan nama ini — Rasulullah menggalakkan membacanya selepas solat. Hargai kemuliaan Islam dan Muslim. Hidup dengan maruah dan hormat diri sebagai cerminan hamba-Nya."
+  },
+  {
+    num: 87, arabic: "الْمُقْسِطُ", latin: "Al-Muqsit", malay: "Yang Maha Adil",
+    meaning: "Yang melaksanakan keadilan yang sempurna dalam setiap urusan.",
+    apply: "Jadilah adil dalam setiap penilaian — terhadap diri sendiri, keluarga, dan orang lain. Jangan pilih kasih. Perjuangkan keadilan dalam masyarakat. Ingat bahawa orang yang adil akan bersama para nabi di sisi Allah."
+  },
+  {
+    num: 88, arabic: "الْجَامِعُ", latin: "Al-Jami'", malay: "Yang Maha Mengumpulkan",
+    meaning: "Yang mengumpulkan semua makhluk pada Hari Kiamat dan menyatukan yang berpisah.",
+    apply: "Satukan keluarga dan komuniti yang berpecah. Jadilah jambatan perdamaian dalam pertelingkahan. Ingat bahawa kita semua akan dikumpulkan di hadapan Allah — persediaan itu lebih penting dari perbalahan dunia."
+  },
+  {
+    num: 89, arabic: "الْغَنِيُّ", latin: "Al-Ghani", malay: "Yang Maha Kaya",
+    meaning: "Yang Maha Kaya dan tidak memerlukan sesuatu pun dari makhluk-Nya. Dialah yang mencukupi segalanya.",
+    apply: "Sedar bahawa segala ibadat dan sedekah kita adalah untuk manfaat diri kita sendiri — bukan kerana Allah memerlukan kita. Kekayaan sejati adalah kaya hati (qana'ah). Jangan terlalu obses dengan kekayaan dunia."
+  },
+  {
+    num: 90, arabic: "الْمُغْنِي", latin: "Al-Mughni", malay: "Yang Maha Pemberi Kekayaan",
+    meaning: "Yang memberikan kecukupan dan kekayaan kepada siapa yang dikehendaki-Nya.",
+    apply: "Berdoa kepada Al-Mughni untuk kecukupan rezeki. Cukupkan diri dengan apa yang ada (qana'ah) sambil terus berusaha. Kongsikan kekayaan yang Allah berikan — kerana memberi tidak mengurangkan rezeki."
+  },
+  {
+    num: 91, arabic: "الْمَانِعُ", latin: "Al-Mani'", malay: "Yang Maha Mencegah",
+    meaning: "Yang mencegah sesuatu menurut hikmah-Nya — menghalang bencana dari menimpa hamba yang dikehendaki-Nya.",
+    apply: "Terima dengan redha apabila sesuatu yang kita inginkan tidak kesampaian — mungkin Allah sedang melindungi kita dari bahaya yang tidak kita nampak. Yakin ada hikmah di sebalik setiap 'tidak' dari-Nya."
+  },
+  {
+    num: 92, arabic: "الضَّارُّ", latin: "Ad-Dharr", malay: "Yang Maha Mendatangkan Mudarat",
+    meaning: "Yang mendatangkan mudarat kepada siapa yang dikehendaki-Nya sebagai ujian atau hukuman, menurut hikmah-Nya.",
+    apply: "Terima musibah sebagai ujian, bukan azab semata-mata. Muhasabah diri apabila ditimpa kesusahan. Sedar bahawa mudarat dunia lebih ringan dari azab akhirat — ini mendorong taubat dan perbaikan diri."
+  },
+  {
+    num: 93, arabic: "النَّافِعُ", latin: "An-Nafi'", malay: "Yang Maha Memberi Manfaat",
+    meaning: "Yang memberikan manfaat kepada siapa yang dikehendaki-Nya. Segala manfaat bersumber dari-Nya.",
+    apply: "Jadilah manusia yang memberi manfaat kepada orang lain — 'Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lain.' Gunakan kemahiran dan masa kita untuk kebaikan komuniti."
+  },
+  {
+    num: 94, arabic: "النُّورُ", latin: "An-Nur", malay: "Yang Maha Bercahaya",
+    meaning: "Cahaya langit dan bumi. Yang menerangi alam dengan cahaya-Nya dan memberikan hidayah kepada hamba-hamba-Nya.",
+    apply: "Cari cahaya hidayah melalui Al-Quran, ilmu, dan solat. Jadilah sumber cahaya dalam komuniti — menerangi orang lain dengan ilmu, kebenaran, dan akhlak mulia. Baca Surah An-Nur untuk penghayatan mendalam."
+  },
+  {
+    num: 95, arabic: "الْهَادِي", latin: "Al-Hadi", malay: "Yang Maha Pemberi Petunjuk",
+    meaning: "Yang memberikan hidayah dan petunjuk kepada hamba-hamba-Nya ke jalan yang benar.",
+    apply: "Sentiasa mohon hidayah dalam setiap rakaat solat (Al-Fatihah). Jangan sombong dengan hidayah yang ada — ia adalah kurnia, bukan hak. Doakan hidayah untuk keluarga dan rakan yang belum terbimbing."
+  },
+  {
+    num: 96, arabic: "الْبَدِيعُ", latin: "Al-Badi'", malay: "Yang Maha Pencipta Yang Indah",
+    meaning: "Yang mencipta sesuatu dengan cara yang luar biasa indah dan unik tanpa ada contoh sebelumnya.",
+    apply: "Hargai keindahan dalam ciptaan Allah — alam, seni, muzik halal, seni bina. Manfaatkan kreativiti untuk menghasilkan karya yang bermakna. Jadikan keindahan sebagai cara mendekatkan diri kepada Pencipta Yang Maha Indah."
+  },
+  {
+    num: 97, arabic: "الْبَاقِي", latin: "Al-Baqi", malay: "Yang Maha Kekal",
+    meaning: "Yang kekal abadi tanpa pengakhiran. Hanya Dia yang benar-benar kekal selamanya.",
+    apply: "Labur untuk yang kekal — amal jariah, ilmu yang bermanfaat, anak soleh — bukan hanya untuk yang sementara. Kematian bukan pengakhiran; ia adalah peralihan ke alam yang lebih kekal bersama Allah Al-Baqi."
+  },
+  {
+    num: 98, arabic: "الْوَارِثُ", latin: "Al-Warith", malay: "Yang Maha Mewarisi",
+    meaning: "Yang mewarisi segala sesuatu setelah seluruh makhluk binasa. Dialah pemilik mutlak yang hakiki.",
+    apply: "Sedar bahawa harta kita hanyalah titipan sementara — akhirnya akan kembali kepada Allah. Gunakan harta sebelum 'diwarisi' Allah — sedekah, wakaf, dan kebaikan yang meninggalkan kesan kekal."
+  },
+  {
+    num: 99, arabic: "الرَّشِيدُ", latin: "Ar-Rashid", malay: "Yang Maha Bijaksana dalam Membimbing",
+    meaning: "Yang Maha Bijaksana dalam mengarahkan segala urusan kepada kebenaran dan keputusan yang tepat.",
+    apply: "Ikuti petunjuk Allah dan Rasul-Nya dalam membuat keputusan hidup. Minta bimbingan melalui solat Istikharah. Pilih pemimpin dan penasihat yang bijaksana. Jadikan Al-Quran dan Sunnah sebagai panduan hidup utama."
+  }
+];
+
+function renderCards(data) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  data.forEach((n, i) => {
+    const delay = Math.min(i * 20, 400);
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.style.animationDelay = delay + 'ms';
+    div.innerHTML = `
+      <div class="card-top">
+        <div class="card-num">${n.num}</div>
+        <div class="card-names">
+          <div class="card-arabic">${n.arabic}</div>
+          <div class="card-latin">${n.latin}</div>
+          <div class="card-malay">${n.malay}</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="card-body">
+        <hr class="card-divider">
+        <div class="section-label">Maksud</div>
+        <div class="card-meaning">${n.meaning}</div>
+        <div class="section-label">Cara Mengaplikasikan</div>
+        <div class="card-application">${n.apply}</div>
+      </div>
+    `;
+    div.addEventListener('click', () => {
+      div.classList.toggle('expanded');
+    });
+    grid.appendChild(div);
+  });
+  document.getElementById('countLabel').textContent =
+    `Menunjukkan ${data.length} daripada 99 nama`;
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = q
+    ? names.filter(n =>
+        n.arabic.includes(q) ||
+        n.latin.toLowerCase().includes(q) ||
+        n.malay.toLowerCase().includes(q) ||
+        n.meaning.toLowerCase().includes(q) ||
+        n.apply.toLowerCase().includes(q) ||
+        String(n.num).includes(q)
+      )
+    : names;
+  renderCards(filtered);
+}
+
+renderCards(names);
+</script>
+</body>
+</html>
